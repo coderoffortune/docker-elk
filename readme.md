@@ -9,6 +9,20 @@ Note: this info is true at the date of this commit, it might change in the futur
 
 X-Pack is a mostly paid plugin, it gives you authentication for the full stack along side with other useful tools. It has a free trial of 30 days and then will revert to a free version where authentication is disabled, yet the monitoring extras are quite good.
 
+## About
+
+This repository is a reference for myself and the sum of my own learning the ELK stack along with Docker as a way to spin it up both locally and on the cloud.
+
+At the end of my, indeed short, journey I've found out that in order to run an ELK stack you need a quite powerful VM, with a couple of cpu and 2 to 4 gigabyte of ram, this makes the stack useless for my current needs and for my current budget.
+
+Yet it might be useful in the future so I want to preserve it for future needs.
+
+The whole repository is about to use env variables to be able to deploy the stack without the need to drop down some configuration files before. 
+
+This even more important when using x-pack because you should provide the password for the built in users (elastic, kibana and logstash_system) and putting them in some configuration file will make them publicly available.
+
+You can find a custom Logstash image based on the official one with the pipeline file inside. You can build it and push it to docker hub so it will work everywhere. 
+
 ## Log with logback appender
 
 ```xml
