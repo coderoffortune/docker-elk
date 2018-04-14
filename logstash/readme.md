@@ -1,4 +1,4 @@
-# Docker image for logstash with preset pipeline conf
+# Docker image for logstash with x-pack and preset pipeline conf
 
 ## Env variables
 To work the image needs the following env variables:

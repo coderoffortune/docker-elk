@@ -11,6 +11,7 @@ services:
       - "9300:9300"
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      ELASTIC_PASSWORD: changeme
       CLUSTER_NAME: "elk-cluster"
       NETWORK_HOST: "0.0.0.0"
       DISCOVERY_ZEN_MINIMUM_MASTER_NODES: 1
@@ -20,7 +21,7 @@ services:
 
   logstash:
     image: 
-      northernlightsio/elk_logstash:6.2.3
+      northernlightsio/elk_logstash-x-pack:6.2.3
     ports:
       - "5000:5000"
     environment:
@@ -30,6 +31,7 @@ services:
       PATH_CONFIG: /usr/share/logstash/pipeline
       ELASTICSEARCH_HOST: elasticsearch
       ELASTICSEARCH_PORT: 9200
+      XPACK_MONITORING_ELASTICSEARCH_URL: "http://elasticsearch:9200"
     networks:
       - elk
     depends_on:
@@ -37,13 +39,16 @@ services:
 
   kibana:
     image: 
-      docker.elastic.co/kibana/kibana:6.2.3
+      docker.elastic.co/kibana/kibana-x-pack:6.2.3
     ports:
       - "5601:5601"
     environment:
       SERVER_NAME: kibana
       SERVER_HOST: "0.0.0.0"
       ELASTICSEARCH_URL: "http://elasticsearch:9200"
+      XPACK_MONITORING_UI_CONTAINER_ELASTICSEARCH_ENABLED: "true"
+      ELASTICSEARCH_USERNAME: elastic 
+      ELASTICSEARCH_PASSWORD: changeme 
     networks:
       - elk
     depends_on:

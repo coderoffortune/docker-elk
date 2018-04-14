@@ -1,7 +1,13 @@
 
 ## Description
 
-A full ELK stack to be run on docker swarm or with docker-compose
+A full ELK stack, with x-pack plugin installed, to be run on docker swarm or with docker-compose.
+
+## X-pack 
+
+Note: this info is true at the date of this commit, it might change in the future in a unforseeable way for me so always refer to elastic website for accurate and up to date informations.
+
+X-Pack is a mostly paid plugin, it gives you authentication for the full stack along side with other useful tools. It has a free trial of 30 days and then will revert to a free version where authentication is disabled, yet the monitoring extras are quite good.
 
 ## Log with logback appender
 
@@ -95,6 +101,7 @@ docker service create \
     --publish 9300:9300 \
     --replicas=1 \
     --env CLUSTER_NAME="elk-cluster" \
+    --env ELASTIC_PASSWORD=changeme \
     --env NETWORK_HOST="0.0.0.0" \
     --env DISCOVERY_ZEN_MINIMUM_MASTER_NODES=1 \
     --env ES_JAVA_OPTS="-Xmx256m -Xms256m" \
@@ -127,8 +134,10 @@ docker service create \
     --env SERVER_HOST="0.0.0.0" \
     --env ELASTICSEARCH_URL="http://elasticsearch:9200" \
     --env XPACK_MONITORING_UI_CONTAINER_ELASTICSEARCH_ENABLED=true \
+    --env ELASTICSEARCH_USERNAME=elastic \
+    --env ELASTICSEARCH_PASSWORD=changeme \
     --network elk \
-    docker.elastic.co/kibana/kibana:6.2.3
+    docker.elastic.co/kibana/kibana-x-pack:6.2.3
 ```
 
 You can pass a configuration file instead of env variables (which are, in my opinion, more cloud friendly). If you choose to do so add a mount like this one:
@@ -152,9 +161,13 @@ docker service create \
     --env PATH_CONFIG=/usr/share/logstash/pipeline \
     --env ELASTICSEARCH_HOST=elasticsearch \
     --env ELASTICSEARCH_PORT=9200 \
+    --env ELASTICSEARCH_USERNAME=elastic \
+    --env ELASTICSEARCH_PASSWORD=changeme \
     --env XPACK_MONITORING_ELASTICSEARCH_URL="http://elasticsearch:9200" \
+    --env XPACK_MONITORING_ELASTICSEARCH_USERNAME=logstash_system \
+    --env XPACK_MONITORING_ELASTICSEARCH_PASSWORD=changeme \
     --network elk \
-    northernlightsio/elk_logstash:6.2.3
+    northernlightsio/elk_logstash-x-pack:6.2.3
 ```
 
 Usage with official docker image and external files for configuration and pipeline definition:
@@ -162,7 +175,7 @@ Usage with official docker image and external files for configuration and pipeli
 ```
     --mount type=bind,src=//Users/alessandro/projects/_learning/docker-elk/logstash/config/logstash.yml,dst=/usr/share/logstash/config/logstash.yml \
     --mount type=bind,src=//Users/alessandro/projects/_learning/docker-elk/logstash/pipeline,dst=/usr/share/logstash/pipeline \
-    docker.elastic.co/logstash/logstash:6.2.3
+    docker.elastic.co/logstash/logstash-x-pack:6.2.3
 ```
 
 
