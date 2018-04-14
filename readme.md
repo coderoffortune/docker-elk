@@ -3,6 +3,16 @@
 
 A full ELK stack to be run on docker swarm or with docker-compose.
 
+## About
+
+This repository is a reference for myself and the sum of my own learning the ELK stack along with Docker as a way to spin it up both locally and on the cloud.
+
+At the end of my, indeed short, journey I've found out that in order to run an ELK stack you need a quite powerful VM, with a couple of cpu and 2 to 4 gigabyte of ram, this makes the stack useless for my current needs and for my current budget.
+
+Yet it might be useful in the future so I want to preserve it for future needs.
+
+The whole repository is about to use env variables to be able to deploy the stack without the need to drop down some configuration files before, so you can find a custom Logstash image based on the official one with the pipeline file inside. You can build it and push it to docker hub so it will work everywhere.
+
 ## Log with logback appender
 
 ```xml
