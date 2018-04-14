@@ -1,7 +1,7 @@
 
 ## Description
 
-A full ELK stack to be run on docker swarm or with docker-compose
+A full ELK stack to be run on docker swarm or with docker-compose.
 
 ## Log with logback appender
 
@@ -126,7 +126,6 @@ docker service create \
     --env SERVER_NAME=kibana \
     --env SERVER_HOST="0.0.0.0" \
     --env ELASTICSEARCH_URL="http://elasticsearch:9200" \
-    --env XPACK_MONITORING_UI_CONTAINER_ELASTICSEARCH_ENABLED=true \
     --network elk \
     docker.elastic.co/kibana/kibana:6.2.3
 ```
@@ -152,7 +151,6 @@ docker service create \
     --env PATH_CONFIG=/usr/share/logstash/pipeline \
     --env ELASTICSEARCH_HOST=elasticsearch \
     --env ELASTICSEARCH_PORT=9200 \
-    --env XPACK_MONITORING_ELASTICSEARCH_URL="http://elasticsearch:9200" \
     --network elk \
     northernlightsio/elk_logstash:6.2.3
 ```
