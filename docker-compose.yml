@@ -1,5 +1,9 @@
 version: '3'
 
+configs:
+  logstash.conf:
+    file: ./logstash/pipeline/logstash.conf
+
 services:
   elasticsearch:
     image: 
@@ -20,7 +24,7 @@ services:
 
   logstash:
     image: 
-      northernlightsio/elk_logstash:6.2.3
+      docker.elastic.co/logstash/logstash:6.2.3
     ports:
       - "5000:5000"
     environment:
@@ -30,6 +34,9 @@ services:
       PATH_CONFIG: /usr/share/logstash/pipeline
       ELASTICSEARCH_HOST: elasticsearch
       ELASTICSEARCH_PORT: 9200
+    configs:
+      - source: logstash.conf
+        target: /usr/share/logstash/pipeline/logstash.conf
     networks:
       - elk
     depends_on:
