@@ -65,18 +65,24 @@ The following commands could help you getting started with smoke test of Elastic
 
 ### Elasticsearch
 
+```
 curl -XGET 'http://localhost:9200'
+```
 
 ### Logstash
 
+```
 nc localhost 5000 < *.log
+```
 
 ### Kibana
 
+```
 curl -XPOST -D- 'http://localhost:5601/api/saved_objects/index-pattern' \
     -H 'Content-Type: application/json' \
-    -H 'kbn-version: 6.2.3' \
+    -H 'kbn-version: 6.2.4' \
     -d '{"attributes":{"title":"logstash-*","timeFieldName":"@timestamp"}}'
+```
 
 ## Manually run services
 
