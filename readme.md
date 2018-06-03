@@ -61,8 +61,6 @@ The whole repository is about to use env variables to be able to deploy the stac
 
 The following commands could help you getting started with smoke test of Elasticsearch, a first import of log in logstash and the configuration of kibana for logstash logs
 
-#-u elastic:changeme
-
 ### Elasticsearch
 
 ```
