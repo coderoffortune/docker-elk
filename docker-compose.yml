@@ -7,7 +7,7 @@ configs:
 services:
   elasticsearch:
     image: 
-      docker.elastic.co/elasticsearch/elasticsearch-basic:6.2.3
+      docker.elastic.co/elasticsearch/elasticsearch-basic:6.2.4
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
     ports:
@@ -24,7 +24,7 @@ services:
 
   logstash:
     image: 
-      docker.elastic.co/logstash/logstash:6.2.3
+      docker.elastic.co/logstash/logstash:6.2.4
     ports:
       - "5000:5000"
     environment:
@@ -44,7 +44,7 @@ services:
 
   kibana:
     image: 
-      docker.elastic.co/kibana/kibana:6.2.3
+      docker.elastic.co/kibana/kibana:6.2.4
     ports:
       - "5601:5601"
     environment:
