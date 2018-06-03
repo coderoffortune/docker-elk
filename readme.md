@@ -78,22 +78,27 @@ build.sbt dependencies:
 
 The following commands could help you getting started with smoke test of Elasticsearch, a first import of log in logstash and the configuration of kibana for logstash logs
 
-#-u elastic:changeme
-
 ### Elasticsearch
 
-curl -XGET 'http://localhost:9200'
+```
+curl -u elastic:changeme -XGET 'http://localhost:9200'
+```
 
 ### Logstash
 
+```
 nc localhost 5000 < *.log
+```
 
 ### Kibana
 
+```
 curl -XPOST -D- 'http://localhost:5601/api/saved_objects/index-pattern' \
     -H 'Content-Type: application/json' \
-    -H 'kbn-version: 6.2.3' \
-    -d '{"attributes":{"title":"logstash-*","timeFieldName":"@timestamp"}}'
+    -H 'kbn-version: 6.2.4' \
+    -d '{"attributes":{"title":"logstash-*","timeFieldName":"@timestamp"}}' \
+    -u elastic:changeme
+```
 
 ## Manually run services
 
