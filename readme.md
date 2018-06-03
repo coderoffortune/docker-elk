@@ -25,6 +25,13 @@ You can find a custom Logstash image based on the official one with the pipeline
 
 ## Log with logback appender
 
+build.sbt dependencies:
+
+```
+    "net.logstash.logback"        %  "logstash-logback-encoder"         % "5.0",
+    "ch.qos.logback"              %  "logback-access"                   % "1.2.3",
+```
+
 ```xml
 <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
     <keepAliveDuration>5 minutes</keepAliveDuration>
